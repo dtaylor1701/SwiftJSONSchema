@@ -1,9 +1,8 @@
 public protocol JSONSchemaObjectRepresentable: Encodable, JSONSchemaRepresentable {
-  associatedtype JSONSchemaKeys: CodingKey
-  static var requiredJSONSchemaKeys: [JSONSchemaKeys]? { get }
-  static var allJSONSchemaKeys: [JSONSchemaKeys] { get }
-  static func propertyJSONSchema(forKey codingKey: JSONSchemaKeys) -> JSONSchema
-  static var jsonSchema: JSONSchema { get }
+  associatedtype CodingKeys: CodingKey
+  static var requiredJSONSchemaKeys: [CodingKeys]? { get }
+  static var allJSONSchemaKeys: [CodingKeys] { get }
+  static func propertyJSONSchema(forKey codingKey: CodingKeys) -> JSONSchema
 }
 
 extension JSONSchemaObjectRepresentable {
@@ -12,12 +11,25 @@ extension JSONSchemaObjectRepresentable {
   }
 }
 
-extension JSONSchemaObjectRepresentable where JSONSchemaKeys: CaseIterable {
-  public static var allJSONSchemaKeys: [JSONSchemaKeys] {
-    Array(JSONSchemaKeys.allCases)
+extension JSONSchemaObjectRepresentable where CodingKeys: CaseIterable {
+  public static var allJSONSchemaKeys: [CodingKeys] {
+    Array(CodingKeys.allCases)
   }
 
-  public static var requiredJSONSchemaKeys: [JSONSchemaKeys]? {
-    Array(JSONSchemaKeys.allCases)
+  public static var requiredJSONSchemaKeys: [CodingKeys]? {
+    Array(CodingKeys.allCases)
+  }
+}
+
+extension JSONSchemaObjectRepresentable {
+  public static func schema<Property: JSONSchemaRepresentable>(
+    for key: KeyPath<Self, Property>,
+    title: String? = nil,
+    description: String? = nil
+  ) -> any JSONSchema {
+    var schema = Property.jsonSchema
+    schema.title = title
+    schema.description = description
+    return schema
   }
 }

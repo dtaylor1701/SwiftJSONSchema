@@ -9,7 +9,6 @@ import Testing
 }
 
 struct TestObject: JSONSchemaObjectRepresentable {
-    typealias JSONSchemaKeys = CodingKeys
     let name: String
     let nestedObject: NestedObject
 
@@ -27,14 +26,13 @@ struct TestObject: JSONSchemaObjectRepresentable {
 }
 
 struct NestedObject: JSONSchemaObjectRepresentable {
-    typealias JSONSchemaKeys = CodingKeys
     enum CodingKeys: String, CodingKey, CaseIterable {
         case value
     }
     let value: Double
     static func propertyJSONSchema(forKey codingKey: CodingKeys) -> any SwiftJSONSchema.JSONSchema {
         switch codingKey {
-        case .value: return NumberSchema()
+        case .value: schema(for: \.value)
         }
     }
 }

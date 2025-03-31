@@ -35,7 +35,7 @@ public struct Properties<Object: JSONSchemaObjectRepresentable>: Encodable {
   }
 
   public func encode(to encoder: Encoder) throws {
-    var container = encoder.container(keyedBy: Object.JSONSchemaKeys.self)
+    var container = encoder.container(keyedBy: Object.CodingKeys.self)
     for codingKey in Object.allJSONSchemaKeys {
       let schema = Object.propertyJSONSchema(forKey: codingKey)
       try container.encode(schema, forKey: codingKey)
