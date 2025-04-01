@@ -1,3 +1,4 @@
 public protocol JSONSchemaRepresentable {
-  static var jsonSchema: JSONSchema { get }
+  associatedtype Schema: JSONSchema
+  static var jsonSchema: Schema { get }
 }

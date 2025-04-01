@@ -6,7 +6,7 @@ public protocol JSONSchemaObjectRepresentable: Encodable, JSONSchemaRepresentabl
 }
 
 extension JSONSchemaObjectRepresentable {
-  public static var jsonSchema: JSONSchema {
+  public static var jsonSchema: some JSONSchema {
     ObjectSchema<Self>()
   }
 }
