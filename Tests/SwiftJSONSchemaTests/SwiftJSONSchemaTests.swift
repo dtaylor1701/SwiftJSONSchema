@@ -10,19 +10,28 @@ import Testing
 
 struct TestObject: JSONSchemaObjectRepresentable {
     let name: String
+    let enumProperty: TestEnum
     let nestedObject: NestedObject
 
     enum CodingKeys: String, CodingKey, CaseIterable {
         case name
         case nestedObject
+        case enumProperty
     }
 
     static func propertyJSONSchema(forKey codingKey: CodingKeys) -> any SwiftJSONSchema.JSONSchema {
         switch codingKey {
-        case .name: return StringSchema()
-        case .nestedObject: return ObjectSchema<NestedObject>()
+        case .name: schema(for: \.name)
+        case .nestedObject: schema(for: \.nestedObject)
+        case .enumProperty: schema(for: \.enumProperty)
         }
     }
+}
+
+enum TestEnum: String, JSONSchemaEnumRepresentable {
+    case one
+    case two
+    case three
 }
 
 struct NestedObject: JSONSchemaObjectRepresentable {
