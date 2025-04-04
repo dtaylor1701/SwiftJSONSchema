@@ -12,18 +12,21 @@ struct TestObject: JSONSchemaObjectRepresentable {
     let name: String
     let enumProperty: TestEnum
     let nestedObject: NestedObject
+    let optionalProperty: Int?
 
     enum CodingKeys: String, CodingKey, CaseIterable {
         case name
         case nestedObject
         case enumProperty
+        case optionalProperty
     }
 
-    static func propertyJSONSchema(forKey codingKey: CodingKeys) -> any JSONSchema {
+    static func schema(forPropertyKey codingKey: CodingKeys) -> any JSONSchema {
         switch codingKey {
         case .name: schema(for: \.name)
         case .nestedObject: schema(for: \.nestedObject)
         case .enumProperty: schema(for: \.enumProperty)
+        case .optionalProperty: schema(for: \.optionalProperty)
         }
     }
 }
@@ -39,7 +42,7 @@ struct NestedObject: JSONSchemaObjectRepresentable {
         case value
     }
     let value: Double
-    static func propertyJSONSchema(forKey codingKey: CodingKeys) -> any JSONSchema {
+    static func schema(forPropertyKey codingKey: CodingKeys) -> any JSONSchema {
         switch codingKey {
         case .value: schema(for: \.value)
         }
