@@ -4,21 +4,21 @@
 import PackageDescription
 
 let package = Package(
-    name: "SwiftJSONSchema",
+    name: "JSONSchema",
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "SwiftJSONSchema",
-            targets: ["SwiftJSONSchema"]),
+            name: "JSONSchema",
+            targets: ["JSONSchema"])
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "SwiftJSONSchema"),
+            name: "JSONSchema"),
         .testTarget(
-            name: "SwiftJSONSchemaTests",
-            dependencies: ["SwiftJSONSchema"]
+            name: "JSONSchemaTests",
+            dependencies: ["JSONSchema"]
         ),
     ]
 )

@@ -1,5 +1,5 @@
 import Foundation
-import SwiftJSONSchema
+import JSONSchema
 import Testing
 
 @Test func example() async throws {
@@ -19,7 +19,7 @@ struct TestObject: JSONSchemaObjectRepresentable {
         case enumProperty
     }
 
-    static func propertyJSONSchema(forKey codingKey: CodingKeys) -> any SwiftJSONSchema.JSONSchema {
+    static func propertyJSONSchema(forKey codingKey: CodingKeys) -> any JSONSchema {
         switch codingKey {
         case .name: schema(for: \.name)
         case .nestedObject: schema(for: \.nestedObject)
@@ -39,7 +39,7 @@ struct NestedObject: JSONSchemaObjectRepresentable {
         case value
     }
     let value: Double
-    static func propertyJSONSchema(forKey codingKey: CodingKeys) -> any SwiftJSONSchema.JSONSchema {
+    static func propertyJSONSchema(forKey codingKey: CodingKeys) -> any JSONSchema {
         switch codingKey {
         case .value: schema(for: \.value)
         }
