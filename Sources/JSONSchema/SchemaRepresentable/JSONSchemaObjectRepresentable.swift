@@ -1,7 +1,7 @@
 /// An object which can be represented as a JSON schema.
-public protocol JSONSchemaObjectRepresentable: Encodable, JSONSchemaRepresentable {
+public protocol JSONSchemaObjectRepresentable: Encodable, JSONSchemaRepresentable, Sendable {
   associatedtype CodingKeys: CodingKey & CaseIterable
-  static func schema(forPropertyKey codingKey: CodingKeys) -> JSONSchema
+  static func schema(forPropertyKey codingKey: CodingKeys) -> any JSONSchema
 }
 
 extension JSONSchemaObjectRepresentable {

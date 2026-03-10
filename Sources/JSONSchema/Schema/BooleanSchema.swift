@@ -1,6 +1,6 @@
 /// JSON schema for a boolean value.
 public struct BooleanSchema: JSONSchema {
-  public var type = "boolean"
+  public var type: String? = "boolean"
   public var title: String?
   public var description: String?
 

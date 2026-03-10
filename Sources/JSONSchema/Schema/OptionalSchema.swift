@@ -1,6 +1,6 @@
 /// JSONSchema for an optional value.
 public struct OptionalSchema<ValueSchema: JSONSchema>: JSONSchema {
-  public var type: String {
+  public var type: String? {
     wrapped.type
   }
 

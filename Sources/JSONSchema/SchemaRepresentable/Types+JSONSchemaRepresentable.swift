@@ -1,3 +1,4 @@
+import Foundation
 extension Int: JSONSchemaRepresentable {
   public static var jsonSchema: some JSONSchema {
     IntegerSchema()
@@ -25,6 +26,24 @@ extension Bool: JSONSchemaRepresentable {
 extension String: JSONSchemaRepresentable {
   public static var jsonSchema: some JSONSchema {
     StringSchema()
+  }
+}
+
+extension URL: JSONSchemaRepresentable {
+  public static var jsonSchema: some JSONSchema {
+    StringSchema(format: "uri")
+  }
+}
+
+extension UUID: JSONSchemaRepresentable {
+  public static var jsonSchema: some JSONSchema {
+    StringSchema(format: "uuid")
+  }
+}
+
+extension Date: JSONSchemaRepresentable {
+  public static var jsonSchema: some JSONSchema {
+    StringSchema(format: "date-time")
   }
 }
 

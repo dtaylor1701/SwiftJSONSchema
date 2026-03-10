@@ -1,7 +1,7 @@
 /// A schema for an enumeration of values.
 public struct EnumSchema<Value: RawRepresentable & CaseIterable>: JSONSchema
-where Value.RawValue: JSONSchemaRepresentable {
-  public var type: String
+where Value.RawValue: JSONSchemaRepresentable & Sendable {
+  public var type: String?
   public var title: String?
   public var description: String?
   public var enumValues: [Value.RawValue]

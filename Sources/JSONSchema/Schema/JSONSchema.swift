@@ -1,6 +1,6 @@
 /// Some type which can be a JSON schema.
-public protocol JSONSchema: Encodable {
-  var type: String { get }
+public protocol JSONSchema: Encodable, Sendable {
+  var type: String? { get }
   var title: String? { get set }
   var description: String? { get set }
 

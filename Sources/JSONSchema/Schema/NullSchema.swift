@@ -1,6 +1,6 @@
 /// JSON schema for a null type value.
 public struct NullSchema: JSONSchema {
-  public var type = "null"
+  public var type: String? = "null"
   public var title: String?
   public var description: String?
 

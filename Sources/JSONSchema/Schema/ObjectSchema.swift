@@ -1,12 +1,22 @@
 /// JSON schema for an object type.
 public struct ObjectSchema<Object: JSONSchemaObjectRepresentable>: JSONSchema {
-  public var type = "object"
+  public var type: String? = "object"
   public var title: String?
   public var description: String?
+  
+  public var minProperties: Int?
+  public var maxProperties: Int?
 
-  public init(title: String? = nil, description: String? = nil) {
+  public init(
+    title: String? = nil,
+    description: String? = nil,
+    minProperties: Int? = nil,
+    maxProperties: Int? = nil
+  ) {
     self.title = title
     self.description = description
+    self.minProperties = minProperties
+    self.maxProperties = maxProperties
   }
 
   enum CodingKeys: String, CodingKey {
@@ -15,6 +25,8 @@ public struct ObjectSchema<Object: JSONSchemaObjectRepresentable>: JSONSchema {
     case required
     case title
     case description
+    case minProperties
+    case maxProperties
   }
 
   public func encode(to encoder: Encoder) throws {
@@ -27,14 +39,17 @@ public struct ObjectSchema<Object: JSONSchemaObjectRepresentable>: JSONSchema {
     try container.encode(properties, forKey: .properties)
     try container.encodeIfPresent(
       properties.requiredProperties, forKey: .required)
+    try container.encodeIfPresent(minProperties, forKey: .minProperties)
+    try container.encodeIfPresent(maxProperties, forKey: .maxProperties)
   }
 }
 
 public struct Properties<Object: JSONSchemaObjectRepresentable>: Encodable {
   var requiredProperties: [String]? {
-    Object.CodingKeys.allCases.filter {
+    let required = Object.CodingKeys.allCases.filter {
       Object.schema(forPropertyKey: $0).isRequired
     }.map(\.stringValue)
+    return required.isEmpty ? nil : required
   }
 
   public func encode(to encoder: Encoder) throws {

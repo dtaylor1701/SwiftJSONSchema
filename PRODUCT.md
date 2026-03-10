@@ -30,9 +30,10 @@ To provide the Swift ecosystem with the most intuitive, type-safe, and idiomatic
 *   [x] Basic Object and Array schema generation.
 *   [x] Optionality handling via `OptionalSchema`.
 *   [x] Integration with Swift's `CodingKeys`.
+*   [x] Composition schemas (`oneOf`, `anyOf`, `allOf`).
 
 ### Medium-Term (Validation & Metadata)
-*   [ ] **Advanced Constraints**: Add support for `pattern` (regex), `minimum`/`maximum`, and `minLength`/`maxLength`.
+*   [x] **Advanced Constraints**: Add support for `pattern` (regex), `minimum`/`maximum`, and `minLength`/`maxLength`.
 *   [ ] **Schema Validation**: Implement a runtime validator to check JSON data against generated schemas.
 *   [ ] **Reference Handling**: Support `$ref` for shared definitions to reduce schema size and complexity.
 *   [ ] **Documentation Helpers**: Enhanced support for `examples` and `deprecated` tags.
