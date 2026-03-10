@@ -21,7 +21,7 @@ Add `JSONSchema` to your `Package.swift` dependencies:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/your-username/JSONSchema.git", from: "1.0.0")
+    .package(url: "https://github.com/your-username/JSONSchema.git", from: "1.1.0")
 ]
 ```
 
